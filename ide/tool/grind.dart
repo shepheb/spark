@@ -6,7 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:grinder/grinder.dart';
+import 'package:hop/hop.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:polymer/builder.dart' as polymer;
@@ -30,38 +30,38 @@ final String refreshToken =
 final String appID = Platform.environment['SPARK_APP_ID'];
 
 void main([List<String> args]) {
-  defineTask('setup', taskFunction: setup);
+  addTask('setup', setup);
 
-  defineTask('mode-notest', taskFunction: (c) => _changeMode(useTestMode: false));
-  defineTask('mode-test', taskFunction: (c) => _changeMode(useTestMode: true));
+  addTask('mode-notest', taskFunction: (c) => _changeMode(useTestMode: false));
+  addTask('mode-test', taskFunction: (c) => _changeMode(useTestMode: true));
 
-  defineTask('lint', taskFunction: lint, depends: ['setup']);
+  addTask('lint', taskFunction: lint, depends: ['setup']);
 
-  defineTask('compile', taskFunction: compile, depends : ['setup']);
-  defineTask('deploy', taskFunction: deploy, depends : ['lint']);
+  addTask('compile', taskFunction: compile, depends : ['setup']);
+  addTask('deploy', taskFunction: deploy, depends : ['lint']);
 
-  defineTask('docs', taskFunction: docs, depends : ['setup']);
-  defineTask('stats', taskFunction: stats);
-  defineTask('archive', taskFunction: archive, depends : ['mode-notest', 'deploy']);
-  defineTask('createSdk', taskFunction: createSdk);
+  addTask('docs', taskFunction: docs, depends : ['setup']);
+  addTask('stats', taskFunction: stats);
+  addTask('archive', taskFunction: archive, depends : ['mode-notest', 'deploy']);
+  addTask('createSdk', taskFunction: createSdk);
 
   // For now, we won't be building the webstore version from Windows.
   if (!Platform.isWindows) {
-    defineTask('release', taskFunction: release, depends : ['mode-notest', 'deploy']);
-    defineTask('release-nightly',
+    addTask('release', taskFunction: release, depends : ['mode-notest', 'deploy']);
+    addTask('release-nightly',
                taskFunction : releaseNightly,
                depends : ['mode-notest', 'deploy']);
   }
 
-  defineTask('clean', taskFunction: clean);
+  addTask('clean', taskFunction: clean);
 
-  startGrinder(args);
+  runHop(args);
 }
 
 /**
  * Init needed dependencies.
  */
-void setup(GrinderContext context) {
+void setup(TaskContext context) {
   // check to make sure we can locate the SDK
   if (sdkDir == null) {
     context.fail("Unable to locate the Dart SDK\n"
