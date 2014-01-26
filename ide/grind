@@ -18,4 +18,4 @@ if [ ! -d "packages" ]; then
   pub get
 fi
 
-dart tool/grind.dart $@
+dart tool/hop_runner.dart $@

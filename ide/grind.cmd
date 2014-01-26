@@ -2,4 +2,4 @@
 @rem All rights reserved. Use of this source code is governed by a BSD-style
 @rem license that can be found in the LICENSE file.
 
-dart tool\grind.dart %*
+dart tool\hop_runner.dart %*
