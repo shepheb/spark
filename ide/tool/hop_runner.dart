@@ -44,7 +44,7 @@ void main([List<String> args]) {
   addTask('docs', docs, dependencies : ['setup']);
   addTask('stats', stats);
   addTask('archive', archive, dependencies : ['mode-notest', 'deploy']);
-  addTask('createSdk', createSdk);
+  addTask('create-sdk', createSdk);
 
   // For now, we won't be building the webstore version from Windows.
   if (!Platform.isWindows) {
