@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import 'package:grinder/grinder.dart' as grinder;
+import 'package:grinder_hop/grinder.dart' as grinder;
 
 import 'tool/grind.dart' as grind;
 

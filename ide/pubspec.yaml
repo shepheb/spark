@@ -27,6 +27,10 @@ dependencies:
   uuid: any
 dev_dependencies:
   args: any
+  grinder_hop:
+    git:
+      ref: hop_migration
+      url: https://github.com/kevmoo/grinder.dart.git
   hop: any
 transformers:
 - polymer:
